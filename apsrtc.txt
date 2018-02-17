@@ -1,0 +1,83 @@
+package com.util;
+
+import org.junit.rules.Timeout;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.concurrent.TimeUnit;
+
+
+
+public class Test2 {
+
+	static WebDriver driver=null;
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+		driver=new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.get("http://www.apsrtconline.in/oprs-web/");
+		driver.manage().window().maximize();
+		
+		
+		driver.findElement(By.name("fromPlaceName")).sendKeys("KURNOOL");
+		driver.findElement(By.id("ui-id-47")).click();
+				
+		driver.findElement(By.name("toPlaceName")).sendKeys("HYDERABAD");
+		driver.findElement(By.id("ui-id-37")).click();
+		
+		driver.findElement(By.name("txtJourneyDate")).click();
+		driver.findElement(By.id("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[4]/td[3]/a"));
+		
+		driver.findElement(By.id("searchBtn")).click();
+		
+		Thread.sleep(5000);
+		WebElement d1=driver.findElement(By.id("noRecordsFound"));
+		if(d1.isDisplayed())
+		 {
+			 System.out.println("no results found for the search");
+		 }
+		else
+		{
+			driver.findElement(By.name("SrvcSelectBtnForward")).click();
+			WebElement d2=driver.findElement(By.id("ForwardBoardId"));
+		    Select se=new Select(d2);
+		    se.selectByValue("7921");
+		    
+		    WebElement d3=driver.findElement(By.id("ForwardDroppingId"));
+		    Select se1=new Select(d3);
+		    se1.selectByValue("5251");
+		    
+		    WebElement d4=driver.findElement(By.id("concessionId"));
+		    Select se2=new Select(d4);
+		    se2.selectByVisibleText("GENERAL PUBLIC");
+
+            driver.findElement(By.id("fwLtBtn"));
+		    
+		    
+		}
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
